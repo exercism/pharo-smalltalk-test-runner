@@ -1,0 +1,22 @@
+{
+  "version" : "v2",
+  "status" : "pass",
+  "message" : "3 ran, 3 passed.",
+  "tests" : [
+    {
+      "name" : "Example method a",
+      "status" : "pass",
+      "test_code" : "testExampleMethodA\n\tself assert: ExampleAllPass new exerciseMethodA equals: $A"
+    },
+    {
+      "name" : "Example method b",
+      "status" : "pass",
+      "test_code" : "testExampleMethodB\n\tself assert: ExampleAllPass new exerciseMethodB equals: $B"
+    },
+    {
+      "name" : "Example method c",
+      "status" : "pass",
+      "test_code" : "testExampleMethodC\n\tself assert: ExampleAllPass new exerciseMethodC equals: $C"
+    }
+  ]
+}

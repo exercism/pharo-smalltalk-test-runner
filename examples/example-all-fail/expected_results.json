@@ -1,0 +1,28 @@
+{
+  "version" : "v2",
+  "status" : "fail",
+  "message" : "Got 'not $A' instead of $A.",
+  "tests" : [
+    {
+      "name" : "Exercise method a",
+      "status" : "fail",
+      "message" : "Got 'not $A' instead of $A.",
+      "output" : "ExampleAllFailTest(TestAsserter)>>assert:description:resumable:\nExampleAllFailTest(TestAsserter)>>assert:description:\nExampleAllFailTest(TestAsserter)>>assert:equals:\nExampleAllFailTest>>testExerciseMethodA\nExampleAllFailTest(TestCase)>>performTest\n",
+      "test_code" : "testExerciseMethodA\n\tself assert: ExampleAllFail new exerciseMethodA equals: $A"
+    },
+    {
+      "name" : "Exercise method b",
+      "status" : "fail",
+      "message" : "Got 'not $B' instead of $B.",
+      "output" : "ExampleAllFailTest(TestAsserter)>>assert:description:resumable:\nExampleAllFailTest(TestAsserter)>>assert:description:\nExampleAllFailTest(TestAsserter)>>assert:equals:\nExampleAllFailTest>>testExerciseMethodB\nExampleAllFailTest(TestCase)>>performTest\n",
+      "test_code" : "testExerciseMethodB\n\tself assert: ExampleAllFail new exerciseMethodB equals: $B"
+    },
+    {
+      "name" : "Exercise method c",
+      "status" : "fail",
+      "message" : "Got 'not $C' instead of $C.",
+      "output" : "ExampleAllFailTest(TestAsserter)>>assert:description:resumable:\nExampleAllFailTest(TestAsserter)>>assert:description:\nExampleAllFailTest(TestAsserter)>>assert:equals:\nExampleAllFailTest>>testExerciseMethodC\nExampleAllFailTest(TestCase)>>performTest\n",
+      "test_code" : "testExerciseMethodC\n\tself assert: ExampleAllFail new exerciseMethodC equals: $C"
+    }
+  ]
+}
