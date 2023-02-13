@@ -1,7 +1,6 @@
 {
-  "version" : "v2",
+  "version" : "2",
   "status" : "pass",
-  "message" : "3 ran, 3 passed.",
   "tests" : [
     {
       "name" : "Example method a",

@@ -1,7 +1,6 @@
 {
-  "version" : "v2",
+  "version" : "2",
   "status" : "pass",
-  "message" : "1 ran, 1 passed.",
   "tests" : [
     {
       "name" : "String extension something returned",

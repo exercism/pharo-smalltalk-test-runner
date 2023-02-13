@@ -1,27 +1,23 @@
 {
-  "version" : "v2",
+  "version" : "2",
   "status" : "error",
-  "message" : "some domain error",
   "tests" : [
     {
       "name" : "Exercise method a",
       "status" : "error",
-      "message" : "some domain error",
-      "output" : "ExampleAllRaiseError(Object)>>error:\nExampleAllRaiseError>>exerciseMethodA\nExampleAllRaiseErrorTest>>testExerciseMethodA\nExampleAllRaiseErrorTest(TestCase)>>performTest\n",
+      "message" : "some domain error\n---Stack-trace---\nExampleAllRaiseError(Object)>>error:\nExampleAllRaiseError>>exerciseMethodA\nExampleAllRaiseErrorTest>>testExerciseMethodA\nExampleAllRaiseErrorTest(TestCase)>>performTest\n",
       "test_code" : "testExerciseMethodA\n\tself assert: ExampleAllRaiseError new exerciseMethodA"
     },
     {
       "name" : "Exercise method b",
       "status" : "error",
-      "message" : "another error",
-      "output" : "ExampleAllRaiseError(Object)>>error:\nExampleAllRaiseError>>exerciseMethodB\nExampleAllRaiseErrorTest>>testExerciseMethodB\nExampleAllRaiseErrorTest(TestCase)>>performTest\n",
+      "message" : "another error\n---Stack-trace---\nExampleAllRaiseError(Object)>>error:\nExampleAllRaiseError>>exerciseMethodB\nExampleAllRaiseErrorTest>>testExerciseMethodB\nExampleAllRaiseErrorTest(TestCase)>>performTest\n",
       "test_code" : "testExerciseMethodB\n\tself assert: ExampleAllRaiseError new exerciseMethodB"
     },
     {
       "name" : "Exercise method c",
       "status" : "error",
-      "message" : "yet another error",
-      "output" : "ExampleAllRaiseError(Object)>>error:\nExampleAllRaiseError>>exerciseMethodC\nExampleAllRaiseErrorTest>>testExerciseMethodC\nExampleAllRaiseErrorTest(TestCase)>>performTest\n",
+      "message" : "yet another error\n---Stack-trace---\nExampleAllRaiseError(Object)>>error:\nExampleAllRaiseError>>exerciseMethodC\nExampleAllRaiseErrorTest>>testExerciseMethodC\nExampleAllRaiseErrorTest(TestCase)>>performTest\n",
       "test_code" : "testExerciseMethodC\n\tself assert: ExampleAllRaiseError new exerciseMethodC"
     }
   ]
