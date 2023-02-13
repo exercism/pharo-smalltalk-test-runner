@@ -16,16 +16,16 @@
 set -e
 
 # Build the Docker image
-docker build --build-arg GROUP_NAMES=testRunnerTests --rm -t exercism/test-runner .
+docker build --build-arg GROUP_NAMES=testRunnerTests --rm --no-cache -t pharo-test-runner .
 
 # Run the Docker image using the settings mimicking the production environment
 docker run \
     --rm \
     --network none \
     --read-only \
-    --mount type=bind,src="${PWD}/tests",dst=/opt/test-runner/tests \
+    --mount type=bind,src="$PWD/tests",dst=/opt/test-runner/tests \
     --mount type=tmpfs,dst=/tmp \
-    --volume "${PWD}/bin/run-tests.sh:/opt/test-runner/bin/run-tests.sh" \
+    --volume "$PWD/bin/run-tests.sh:/opt/test-runner/bin/run-tests.sh" \
     --workdir /opt/test-runner \
     --entrypoint /opt/test-runner/bin/run-tests.sh \
-    exercism/test-runner
+    pharo-test-runner
