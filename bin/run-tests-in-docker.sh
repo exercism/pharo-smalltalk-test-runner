@@ -16,7 +16,7 @@
 set -e
 
 # Build the Docker image
-docker build --build-arg GROUP_NAMES=testRunnerTests --rm --no-cache -t pharo-test-runner .
+docker build --build-arg GROUP_NAMES=testRunnerTests --rm --no-cache -t pharo-smalltalk-test-runner .
 
 # Run the Docker image using the settings mimicking the production environment
 docker run \
@@ -28,4 +28,4 @@ docker run \
     --volume "$PWD/bin/run-tests.sh:/opt/test-runner/bin/run-tests.sh" \
     --workdir /opt/test-runner \
     --entrypoint /opt/test-runner/bin/run-tests.sh \
-    pharo-test-runner
+    pharo-smalltalk-test-runner

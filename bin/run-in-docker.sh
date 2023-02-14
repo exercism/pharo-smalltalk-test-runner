@@ -26,7 +26,7 @@ if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
 fi
 
 # build docker image
-docker build --rm --no-cache -t pharo-test-runner .
+docker build --rm --no-cache -t pharo-smalltalk-test-runner .
 
 # Create output directory if it doesn't exist
 output_dir="$3"
@@ -36,4 +36,4 @@ mkdir -p "$output_dir"
 docker run \
     --mount type=bind,src=$PWD/$2,dst=/solution \
     --mount type=bind,src=$PWD/$output_dir,dst=/output \
-    pharo-test-runner $1 /solution/ /output/
+    pharo-smalltalk-test-runner $1 /solution/ /output/
