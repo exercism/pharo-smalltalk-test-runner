@@ -12,6 +12,15 @@ COPY /bin /opt/test-runner/bin
 
 WORKDIR /opt/test-runner
 USER root
+
+# remove unncecessary changes file of Pharo
 RUN rm /opt/test-runner/Pharo.changes
+
+# set owner to pharo user
+RUN chown -R pharo /opt/test-runner 
+
+# set write permission for pharo user
+RUN chmod -R u+w /opt/test-runner  
+
 USER pharo
 ENTRYPOINT [ "/opt/test-runner/bin/run.sh" ]
