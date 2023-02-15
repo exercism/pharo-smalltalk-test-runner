@@ -34,6 +34,8 @@ mkdir -p "$output_dir"
 
 # run image passing the arguments
 docker run \
+    --read-only \
+    --network none \
     --mount type=bind,src=$PWD/$2,dst=/solution \
     --mount type=bind,src=$PWD/$output_dir,dst=/output \
     pharo-test-runner $1 /solution/ /output/
