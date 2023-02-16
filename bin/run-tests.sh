@@ -18,19 +18,11 @@ for test_dir in tests/*; do
     if [ -d "$test_dir" ]; then
         test_dir_name=$(basename "${test_dir}")
         test_dir_path=$(realpath "${test_dir}")
-        results_file_path="${test_dir_path}/results.json"
+        tmp_dir_path=$(mktemp -d)
+        results_file_path="${tmp_dir_path}/results.json"        
         expected_results_file_path="${test_dir_path}/expected_results.json"
 
-        echo "Some random text." > "${test_dir_path}/myfile.txt"
-        echo "Printing content of: ${test_dir_path}/myfile.txt"
-        cat "${test_dir_path}/myfile.txt"
-
-        OWNER=$(stat -c '%U' ${test_dir_path})
-        echo "The owner of the ${test_dir_path} directory is $OWNER."
-        CURRENT_USER=$(whoami)
-        echo "The current user is $CURRENT_USER"
-
-        bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}"
+        bin/run.sh "${test_dir_name}" "${test_dir_path}" "${tmp_dir_path}"
 
         # OPTIONAL: Normalize the results file
         # If the results.json file contains information that changes between 

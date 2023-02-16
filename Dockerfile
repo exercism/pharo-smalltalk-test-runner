@@ -12,9 +12,9 @@ COPY /bin /opt/test-runner/bin
 
 WORKDIR /opt/test-runner
 
-USER root
-# remove unncecessary changes file of Pharo
-RUN rm /opt/test-runner/Pharo.changes
+# remove unnecessary changes file of Pharo
+RUN rm Pharo.changes
+
 USER pharo
 
 ENTRYPOINT [ "/opt/test-runner/bin/run.sh" ]
