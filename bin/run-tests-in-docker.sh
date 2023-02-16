@@ -23,7 +23,7 @@ docker run \
     --rm \
     --network none \
     --read-only \
-    --mount type=bind,src="$PWD/tests",dst=/opt/test-runner/tests \
+    --mount type=bind,src="$PWD/tests",dst=/opt/test-runner/tests,uid=1111 \
     --mount type=tmpfs,dst=/tmp \
     --volume "$PWD/bin/run-tests.sh:/opt/test-runner/bin/run-tests.sh" \
     --workdir /opt/test-runner \

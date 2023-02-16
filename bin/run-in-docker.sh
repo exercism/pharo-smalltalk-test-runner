@@ -36,6 +36,6 @@ mkdir -p "$output_dir"
 docker run \
     --read-only \
     --network none \
-    --mount type=bind,src=$PWD/$2,dst=/solution \
+    --mount type=bind,src=$PWD/$2,dst=/solution,uid=1111 \
     --mount type=bind,src=$PWD/$output_dir,dst=/output \
     exercism/pharo-smalltalk-test-runner $1 /solution/ /output/
