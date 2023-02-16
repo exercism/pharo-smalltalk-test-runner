@@ -21,6 +21,10 @@ for test_dir in tests/*; do
         results_file_path="${test_dir_path}/results.json"
         expected_results_file_path="${test_dir_path}/expected_results.json"
 
+        echo "Some random text." > "${test_dir_path}/myfile.txt"
+        echo "Printing content of: ${test_dir_path}/myfile.txt"
+        cat "${test_dir_path}/myfile.txt"
+
         bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}"
 
         # OPTIONAL: Normalize the results file
