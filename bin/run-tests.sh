@@ -25,6 +25,11 @@ for test_dir in tests/*; do
         echo "Printing content of: ${test_dir_path}/myfile.txt"
         cat "${test_dir_path}/myfile.txt"
 
+        OWNER=$(stat -c '%U' ${tests_dir_path})
+        echo "The owner of the ${tests_dir_path} directory is $OWNER."
+        CURRENT_USER=$(whoami)
+        echo "The current user is $CURRENT_USER"
+
         bin/run.sh "${test_dir_name}" "${test_dir_path}" "${test_dir_path}"
 
         # OPTIONAL: Normalize the results file
