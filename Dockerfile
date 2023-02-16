@@ -12,6 +12,7 @@ COPY /bin /opt/test-runner/bin
 
 WORKDIR /opt/test-runner
 
+USER root
 # remove unnecessary changes file of Pharo
 RUN rm Pharo.changes
 
