@@ -14,7 +14,7 @@ WORKDIR /opt/test-runner
 
 USER root
 # remove unncecessary changes file of Pharo
-RUN rm /opt/test-runner/Pharo.changes
+RUN rm Pharo.changes
 # assign UID that will be used for mounting
 RUN usermod -u 1111 pharo
 USER pharo
