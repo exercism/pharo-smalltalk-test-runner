@@ -1,0 +1,23 @@
+{
+  "version" : "2",
+  "status" : "error",
+  "tests" : [
+    {
+      "name" : "Exercise method a",
+      "status" : "error",
+      "message" : "Error occured in method A\n---Stack-trace---\nExampleErrorFailPass(Object)>>error:\nExampleErrorFailPass>>exerciseMethodA\nExampleErrorFailPassTest>>testExerciseMethodA\nExampleErrorFailPassTest(TestCase)>>performTest\n",
+      "test_code" : "testExerciseMethodA\n\tself assert: ExampleErrorFailPass new exerciseMethodA equals: $A"
+    },
+    {
+      "name" : "Exercise method b",
+      "status" : "fail",
+      "message" : "Got 'not $B' instead of $B.\n---Stack-trace---\nExampleErrorFailPassTest(TestAsserter)>>assert:description:resumable:\nExampleErrorFailPassTest(TestAsserter)>>assert:description:\nExampleErrorFailPassTest(TestAsserter)>>assert:equals:\nExampleErrorFailPassTest>>testExerciseMethodB\nExampleErrorFailPassTest(TestCase)>>performTest\n",
+      "test_code" : "testExerciseMethodB\n\tself assert: ExampleErrorFailPass new exerciseMethodB equals: $B"
+    },
+    {
+      "name" : "Exercise method c",
+      "status" : "pass",
+      "test_code" : "testExerciseMethodC\n\tself assert: ExampleErrorFailPass new exerciseMethodC equals: $C"
+    }
+  ]
+}

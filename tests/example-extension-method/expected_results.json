@@ -1,0 +1,11 @@
+{
+  "version" : "2",
+  "status" : "pass",
+  "tests" : [
+    {
+      "name" : "String extension something returned",
+      "status" : "pass",
+      "test_code" : "testStringExtensionSomethingReturned\n\tself assert: String new somethingReturned equals: 'something returned'"
+    }
+  ]
+}
