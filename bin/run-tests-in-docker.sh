@@ -16,7 +16,7 @@
 set -e
 
 # Build the Docker image
-docker build --build-arg GROUP_NAMES=testRunnerTests --rm --no-cache -t exercism/pharo-smalltalk-test-runner .
+docker build --build-arg GROUP_NAMES=testRunnerTests --rm --no-cache --load -t exercism/pharo-smalltalk-test-runner .
 
 # Run the Docker image using the settings mimicking the production environment
 docker run \
