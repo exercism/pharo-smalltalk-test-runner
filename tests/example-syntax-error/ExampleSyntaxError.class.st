@@ -1,7 +1,7 @@
 Class {
 	#name : #ExampleSyntaxError, ==> Syntax error here <==
 	#superclass : #Object,
-	#category : #ExercismTestRunnerTests
+	#category : #'Exercise@ExampleSyntaxError'
 }
 
 { #category : #'as yet unclassified' }
