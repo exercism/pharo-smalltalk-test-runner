@@ -1,0 +1,24 @@
+{
+  "version" : "2",
+  "status" : "error",
+  "tests" : [
+    {
+      "name" : "Example method a",
+      "status" : "error",
+      "message" : "Message not understood: ExampleEmptySolutionClass >> #exerciseMethodA\n---Stack-trace---\nExampleEmptySolutionClass(Object)>>doesNotUnderstand: #exerciseMethodA\nExampleEmptySolutionClassTest>>testExampleMethodA\nExampleEmptySolutionClassTest(TestCase)>>performTest\n",
+      "test_code" : "testExampleMethodA\n\tself assert: ExampleEmptySolutionClass new exerciseMethodA equals: $A"
+    },
+    {
+      "name" : "Example method b",
+      "status" : "error",
+      "message" : "Message not understood: ExampleEmptySolutionClass >> #exerciseMethodB\n---Stack-trace---\nExampleEmptySolutionClass(Object)>>doesNotUnderstand: #exerciseMethodB\nExampleEmptySolutionClassTest>>testExampleMethodB\nExampleEmptySolutionClassTest(TestCase)>>performTest\n",
+      "test_code" : "testExampleMethodB\n\tself assert: ExampleEmptySolutionClass new exerciseMethodB equals: $B"
+    },
+    {
+      "name" : "Example method c",
+      "status" : "error",
+      "message" : "Message not understood: ExampleEmptySolutionClass >> #exerciseMethodC\n---Stack-trace---\nExampleEmptySolutionClass(Object)>>doesNotUnderstand: #exerciseMethodC\nExampleEmptySolutionClassTest>>testExampleMethodC\nExampleEmptySolutionClassTest(TestCase)>>performTest\n",
+      "test_code" : "testExampleMethodC\n\tself assert: ExampleEmptySolutionClass new exerciseMethodC equals: $C"
+    }
+  ]
+}

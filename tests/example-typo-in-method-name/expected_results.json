@@ -1,0 +1,5 @@
+{
+  "version" : "2",
+  "status" : "error",
+  "message" : "Invalid source code - Package as yet unclassified depends on the following classes:\r  ExampleTypoInMethodNameATYPO\rYou must resolve these dependencies before you will be able to load these definitions: \r  ExampleTypoInMethodNameATYPO>>#exerciseMethodA\r"
+}

@@ -1,7 +1,7 @@
 Class {
 	#name : #ExampleAllFail,
 	#superclass : #Object,
-	#category : #ExercismTestRunnerTests
+	#category : #'Exercise@ExampleAllFail'
 }
 
 { #category : #'as yet unclassified' }

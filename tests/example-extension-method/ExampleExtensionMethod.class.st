@@ -1,6 +1,6 @@
 Extension { #name : #String }
 
-{ #category : #'*ExercismTestRunnerTests' }
+{ #category : #'*Exercise@ExampleExtensionMethod' }
 String >> somethingReturned [
 
 	^ 'something returned'
