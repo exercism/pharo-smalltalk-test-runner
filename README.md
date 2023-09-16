@@ -5,18 +5,18 @@
 This is [Exercism's test runner](https://github.com/exercism/v3-docs/tree/master/anatomy/track-tooling/test-runners#test-runners) for the [Pharo Smalltalk track](https://exercism.org/tracks/pharo-smalltalk).
 
 ## Prepare Pharo image for Test Runner
-If you'd use test runner from scripts using Docker, there is no need to prepare Pharo image, since `bin/run-in-docker.sh` and `bin/run-tests-in-docker.sh` will prepare Pharo image for you (specified in Dockerfile).
-If you want to test locally without using Docker, you should use [Pharo stable version](https://pharo.org/download) and on running Pharo image evaluate:
-```Smalltalk
-Iceberg remoteTypeSelector: #httpsUrl.
-Metacello new
- baseline: 'Exercism';
- repository: 'github://exercism/pharo-smalltalk:main/releases/latest';
- load: 'testRunner'.
+If you'd use test runner from scripts using Docker, there is no need to prepare Pharo image, since `bin/run-in-docker.sh` and `bin/run-tests-in-docker.sh` will prepare Pharo image for you (specified in Dockerfile).  
+__BUT:__ If you want to test locally without using Docker, you should use following:
+- 1st command downloads Pharo 11 (latest) including VM.  
+- 2nd command installs test runner into image.  
+- 3rd command runs test runner with given input parameters.  
 ```
-And then save the Pharo image.
+curl -L https://get.pharo.org/110+vm | bash
+./pharo Pharo.image metacello install github://exercism/pharo-smalltalk:main/releases/latest BaselineOfExercism --groups=testRunner
+./pharo Pharo.image clap testExercise slug-name pathToDirWithSolution pharoOutputDirectory
+```
 
->__Note__: Instead of `testRunner` you could load ` 'testRunnerTests` to load Test Runner project baseline with tests, in case you want to run example tests.
+>__Note__: Instead of `testRunner` group (2nd command above) you could load ` 'testRunnerTests` to load Test Runner project baseline with tests, in case you want to run example tests.
 ## Executing the Test Runner
 
 The test runner requires 3 parameters:
