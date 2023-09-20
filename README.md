@@ -12,7 +12,7 @@ __BUT:__ If you want to test locally without using Docker, you should use follow
 - 2nd command installs test runner into image.  
 - 3rd command runs test runner with given input parameters.  
 ```
-curl -L https://get.pharo.org/110+vm | bash
+curl https://get.pharo.org | bash 
 ./pharo Pharo.image metacello install github://exercism/pharo-smalltalk:main/releases/latest BaselineOfExercism --groups=testRunner
 ./pharo Pharo.image clap testExercise slug-name pathToDirWithSolution pharoOutputDirectory
 ```
