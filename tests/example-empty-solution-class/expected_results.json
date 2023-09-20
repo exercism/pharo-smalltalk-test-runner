@@ -1,6 +1,6 @@
 {
   "version" : "2",
-  "status" : "error",
+  "status" : "fail",
   "tests" : [
     {
       "name" : "Example method a",
