@@ -36,8 +36,7 @@ jobs:
           tags: exercism/pharo-smalltalk-test-runner
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          build-args: |
-            SHA_OR_BRANCH=${{ env.SHA_OR_BRANCH }}
+          build-args: SHA_OR_BRANCH=${{ env.SHA_OR_BRANCH }}
 
       - name: Run Tests in Docker
         run: bin/run-tests-in-docker.sh
