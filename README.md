@@ -3,7 +3,7 @@
 [![Build & Unit tests](https://github.com/exercism/pharo-smalltalk-test-runner/actions/workflows/ci.yml/badge.svg)](https://github.com/exercism/pharo-smalltalk-test-runner/actions/workflows/ci.yml)
 
 This is [Exercism's test runner](https://github.com/exercism/v3-docs/tree/master/anatomy/track-tooling/test-runners#test-runners) for the [Pharo Smalltalk track](https://exercism.org/tracks/pharo-smalltalk).  
->__Note:__ Pharo track Test Runner used on Exercism website should be in sync with Pharo track - commit:  [ee92563](https://github.com/exercism/pharo-smalltalk/commit/ee92563026e5e34cdebc04de041e14c49ec02863)
+>__Note:__ Pharo track Test Runner used on Exercism website should be in sync with Pharo track - commit:  [ccd10ec](https://github.com/exercism/pharo-smalltalk/commit/ccd10ecfd01adcfc95e0eb86369ff631c892b5fd)
 
 ## Prepare Pharo image for Test Runner
 If you'd use test runner from scripts using Docker, there is no need to prepare Pharo image, since `bin/run-in-docker.sh` and `bin/run-tests-in-docker.sh` will prepare Pharo image for you (specified in Dockerfile).  
