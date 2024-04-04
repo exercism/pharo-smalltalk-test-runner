@@ -23,8 +23,7 @@ jobs:
 
       - name: Read Pharo-sync-commit file and set to env variable
         run: |
-          # Read the content of the second line of the file and store it in SHA_OR_BRANCH
-          SHA_OR_BRANCH=$(sed -n '3p' Pharo-sync-commit)
+          bin/export-sync-commit.sh
           echo "SHA_OR_BRANCH=${SHA_OR_BRANCH}" >> $GITHUB_ENV
 
       - name: Build Docker image and store in cache
