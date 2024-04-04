@@ -25,8 +25,10 @@ if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
     exit 1
 fi
 
+bin/export-sync-commit.sh
+
 # build docker image
-docker build --rm --no-cache -t exercism/pharo-smalltalk-test-runner .
+docker build --build-arg SHA_OR_BRANCH="${SHA_OR_BRANCH}" --rm -t exercism/pharo-smalltalk-test-runner .
 
 # Create output directory if it doesn't exist
 output_dir="$3"

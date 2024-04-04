@@ -10,9 +10,22 @@ permissions:
   contents: write
 
 jobs:
+  prepare:
+    runs-on: ubuntu-22.04
+    outputs:
+      SHA_OR_BRANCH: ${{ steps.export-sync-commit.outputs.SHA_OR_BRANCH }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c
+
+      - name: Export sync commit
+        id: export-sync-commit
+        run: bin/export-sync-commit.sh
+
   build-and-push-image:
     if: github.repository_owner == 'exercism' # Stops this job from running on forks.
     uses: exercism/github-actions/.github/workflows/docker-build-push-image.yml@main
+    needs: prepare
     secrets:
       AWS_ACCOUNT_ID: ${{secrets.AWS_ACCOUNT_ID}}
       AWS_REGION: ${{secrets.AWS_REGION}}
@@ -20,3 +33,4 @@ jobs:
       AWS_ECR_SECRET_ACCESS_KEY: ${{secrets.AWS_ECR_SECRET_ACCESS_KEY}}
       DOCKERHUB_USERNAME: ${{secrets.DOCKERHUB_USERNAME}}
       DOCKERHUB_PASSWORD: ${{secrets.DOCKERHUB_PASSWORD}}
+      DOCKER_BUILD_ARGS: SHA_OR_BRANCH=${{needs.prepare.outputs.SHA_OR_BRANCH}}
