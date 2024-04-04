@@ -26,7 +26,7 @@ if [ -z "$1" ] || [ -z "$2" ] || [ -z "$3" ]; then
 fi
 
 # build docker image
-docker build --rm --no-cache -t exercism/pharo-smalltalk-test-runner .
+docker build --rm -t exercism/pharo-smalltalk-test-runner .
 
 # Create output directory if it doesn't exist
 output_dir="$3"
