@@ -107,6 +107,54 @@ ExercismTestRunnerTest class >> mockSnapshotRunnerTestCaseSTON [
 }'
 ]
 
+{ #category : 'test-data' }
+ExercismTestRunnerTest class >> prepareMockTestCaseForTestRunner [
+" this is used for generating STON representation of MCSnapshot, that can be used to be loaded from file as part of TestRunner functionality"
+|aClass aPackage|
+
+	aClass := ExercismTest << #MockRunnerTest
+		slots: {};
+		package: 'Exercise@MockRunner';
+		install.
+
+
+	aClass compile: 'testMockMethodA 
+	self assert: MockRunner new mockMethodA'.
+	aClass compile: 'testMockMethodB
+	self assert: MockRunner new mockMethodB'.
+	aClass compile: 'testMockMethodC 
+	self assert: MockRunner new mockMethodC'.
+	aClass class compile: 'exercise
+	^ (self createExerciseAfter: HelloWorldTest)
+		isCore: true;
+		difficulty: 1;
+		topics: #(''introduction'');
+		yourself'.
+	aPackage := RPackageOrganizer default packageNamed: 'Exercise@MockRunner'.
+	^ TonelWriter new toSTON: aPackage snapshot.
+]
+
+{ #category : 'test-data' }
+ExercismTestRunnerTest class >> prepareMockTestSolutionForTestRunner [
+" this is used for generating STON representation of MCSnapshot, that can be used to be loaded from file as part of TestRunner functionality"
+|aClass |
+
+	aClass := Object << #MockRunner
+		slots: {};
+		package: 'Exercise@MockRunner';
+		install.
+
+
+	aClass compile: 'mockMethodA 
+	^ true'.
+	aClass compile: 'mockMethodB
+	^ false'.
+	aClass compile: 'mockMethodC 
+	self error: ''My domain mock error.'' '.
+
+	^ TonelWriter new toSTON: aClass package snapshot.
+]
+
 { #category : 'private' }
 ExercismTestRunnerTest >> mockRunnerSolutionSnapshot [
 
@@ -177,6 +225,40 @@ ExercismTestRunnerTest >> tearDown [
 ]
 
 { #category : 'tests' }
+ExercismTestRunnerTest >> testFindExercise [
+
+	self should: [ExercismTestRunner default findExercise: 'blurb' ] raise: ExDomainError description: 'Error occurs when trying to find non existing exercise'.
+	
+	self assert: (ExercismTestRunner default findExercise: 'welcome') testCase equals: WelcomeTest. 
+]
+
+{ #category : 'tests' }
+ExercismTestRunnerTest >> testImportSourceFilesfrom [
+
+	| memRef |
+	memRef := FileSystem memory root.
+	self
+		should: [ ExercismTestRunner default importSourceFilesfrom: memRef ]
+		raise: ExDomainError
+		description:
+		'Directory with no source code definitions should raise domain error.'.
+
+	self prepareMockSolutionFileIn: memRef.
+	ExercismTestRunner default importSourceFilesfrom: memRef.
+	"package with solution should exists"
+	self assert: (PackageOrganizer default
+			 packageNamed: 'Exercise@MockRunner'
+			 ifAbsent: [ nil ]) isNotNil.
+	"MockRunner>>mockMethodA returns true"
+	self assert: (self class environment at: #MockRunner) new mockMethodA.
+	
+	"MockRunner>>mockMethodB returns false"
+	self deny: (self class environment at: #MockRunner) new mockMethodB.
+
+	self should: [ (self class environment at: #MockRunner) new mockMethodC] raise: Error description: 'MockRunner>>mockMethodC should raise error.'.
+]
+
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testLoadSourceDefinitionsFrom [
 
 	|memRef definitions|
@@ -211,6 +293,14 @@ ExercismTestRunnerTest >> testRemoveDefinedSolutionClassesAndExtensionMethods [
 	exercise removeDefinedSolutionClassesAndExtensionMethods.
 	self assert: exercise solutionClasses isEmpty.
 	self assert: exercise definedSolutionClasses isEmpty.
+]
+
+{ #category : 'tests' }
+ExercismTestRunnerTest >> testRunTestsFor [
+
+	self should: [ExercismTestRunner default runTestsFor: Object] raise: ExDomainError description: 'Error occurs when trying to test non existing test case'.
+	
+	self assert: (ExercismTestRunner default runTestsFor: WelcomeTest) hasPassed.
 ]
 
 { #category : 'running' }

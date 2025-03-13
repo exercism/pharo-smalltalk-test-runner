@@ -37,3 +37,11 @@ ExampleAllPassTest >> testExampleMethodA [
 ]
 '
 ]
+
+{ #category : 'config' }
+ExampleTypoInMethodNameTest class >> exercise [
+	^ (ExercismExercise for: self)
+		difficulty: 1;
+		topics: #(''introduction'');
+		yourself.
+]

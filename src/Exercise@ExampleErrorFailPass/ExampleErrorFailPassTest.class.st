@@ -56,3 +56,32 @@ ExampleErrorFailPassTest >> testExerciseMethodC [
 ]
 '
 ]
+
+{ #category : 'config' }
+ExampleErrorFailPassTest class >> exercise [
+	^ (ExercismExercise for: self)
+		difficulty: 1;
+		topics: #(''introduction'');
+		yourself.
+]
+
+{ #category : 'config' }
+ExampleErrorFailPassTest class >> prepareExampleSolutionSourceCode [
+
+" this is used for generating STON representation of MCSnapshot, that can be used to generate solution of example (golden test)"
+| solutionClass|
+
+	solutionClass  := Object << (self exercise exerciseClassName)
+	slots:{};
+	package: self package name asString;
+	install.
+
+	solutionClass compile: ('exerciseMethodA
+	^ self error: ''Error occured in method A''').
+	solutionClass compile: ('exerciseMethodB
+	^ ''not $B''').	
+	solutionClass compile: ('exerciseMethodC
+	^ $C').
+
+	^ TonelWriter sourceCodeOf: solutionClass.
+]

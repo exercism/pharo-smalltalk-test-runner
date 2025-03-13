@@ -19,6 +19,27 @@ ExercismTest class >> exampleDirName [
 ]
 
 { #category : '*ExercismTestRunnerTests' }
+ExercismTest class >> prepareExampleSolutionSourceCode [
+
+" this is used for generating STON representation of MCSnapshot, that can be used to generate solution of example (golden test)"
+| solutionClass|
+
+	solutionClass  := Object << (self exercise exerciseClassName)
+	slots: {};
+	package: self package name asString;
+	install.
+
+	solutionClass compile: ('exerciseMethodA
+	^ $A').
+	solutionClass compile: ('exerciseMethodB
+	^ $B').	
+	solutionClass compile: ('exerciseMethodC
+	^ $C').
+
+	^ TonelWriter sourceCodeOf: solutionClass.
+]
+
+{ #category : '*ExercismTestRunnerTests' }
 ExercismTest class >> prepareExampleTestCasesSourceCode [
 
 " this is used for generating STON representation of MCSnapshot, that can be used to generate solution of example (golden test)"

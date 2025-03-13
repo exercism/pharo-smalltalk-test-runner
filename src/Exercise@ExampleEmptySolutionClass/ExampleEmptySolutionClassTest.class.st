@@ -41,3 +41,11 @@ ExampleEmptySolutionClassTest >> testExampleMethodC [
 ]
 '
 ]
+
+{ #category : 'config' }
+ExampleEmptySolutionClassTest class >> exercise [
+	^ (ExercismExercise for: self)
+		difficulty: 1;
+		topics: #(''introduction'');
+		yourself.
+]

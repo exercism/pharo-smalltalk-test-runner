@@ -56,3 +56,11 @@ ExampleAllPassTest >> testExampleMethodC [
 ]
 '
 ]
+
+{ #category : 'config' }
+ExampleAllPassTest class >> exercise [
+	^ (ExercismExercise for: self)
+		difficulty: 1;
+		topics: #(''introduction'');
+		yourself.
+]

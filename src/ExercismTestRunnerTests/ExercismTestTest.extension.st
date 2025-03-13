@@ -50,6 +50,42 @@ ExercismTestTest >> testHumanReadableName [
 ]
 
 { #category : '*ExercismTestRunnerTests' }
+ExercismTestTest >> testResultDebugInfo [
+	|testCase|
+	testCase := WelcomeTest new.
+	testCase setTestSelector: #testWelcome.
+	self assert: testCase resultDebugInfo equals: ''. 
+	
+	testCase setTestSelector: nil.
+	
+	"test if stack bottom is present"
+	self assert: (testCase resultDebugInfo includesSubstring: 'HelloWorldTest(TestCase)>>performTest'). 
+]
+
+{ #category : '*ExercismTestRunnerTests' }
+ExercismTestTest >> testResultMessage [
+	|testCase|
+	testCase := WelcomeTest new.
+	testCase setTestSelector: #testWelcome.
+	self assert: testCase resultMessage equals: ''. 
+	
+	testCase setTestSelector: nil.
+	
+	"errors should provide some error message - exception description"
+	self assert: testCase resultMessage isNotEmpty. 
+]
+
+{ #category : '*ExercismTestRunnerTests' }
+ExercismTestTest >> testSourceCodeString [
+	|testCase|
+	testCase := WelcomeTest new.
+	testCase setTestSelector: #testWelcome.
+	self assert: (testCase sourceCodeString includesSubstring:  'testWelcome'). 
+	"test if linux line endings are used for json output"
+	self assert: (testCase sourceCodeString includes:  Character lf). 
+]
+
+{ #category : '*ExercismTestRunnerTests' }
 ExercismTestTest >> testStatusString [
 
 	| testRunnerTest testResult mockTestClass|

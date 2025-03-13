@@ -33,3 +33,11 @@ ExampleExtensionMethodTest >> testStringExtensionSomethingReturned [
 ]
 '
 ]
+
+{ #category : 'config' }
+ExampleExtensionMethodTest class >> exercise [
+	^ (ExercismExercise for: self)
+		difficulty: 1;
+		topics: #(''introduction'');
+		yourself.
+]

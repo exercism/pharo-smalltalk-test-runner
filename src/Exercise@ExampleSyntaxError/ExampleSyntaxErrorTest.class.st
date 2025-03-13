@@ -56,3 +56,11 @@ ExampleSyntaxErrorTest >> testExerciseMethodC [
 ]
 '
 ]
+
+{ #category : 'config' }
+ExampleSyntaxErrorTest class >> exercise [
+	^ (ExercismExercise for: self)
+		difficulty: 1;
+		topics: #(''introduction'');
+		yourself.
+]

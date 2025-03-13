@@ -32,6 +32,21 @@ BaselineOfExercismTestRunner >> baseline: spec [
 		]
 ]
 
+{ #category : 'initialization' }
+BaselineOfExercismTestRunner >> setExercismLogo [
+	| exercismLogo |
+	exercismLogo := (AlphaImageMorph
+		withForm:
+		(ZnEasy
+		getPng:
+			'https://avatars.githubusercontent.com/u/5624255?s=200&v=4'))
+		layout: #scaledAspect;
+		extent: 100 @ 100;
+		position: 10 @ 135;
+		lock.
+	self currentWorld addMorph: exercismLogo
+]
+
 { #category : 'baselines' }
 BaselineOfExercismTestRunner >> setUpDependencies:	spec [ 
 	"Project depends on main Exercism repository classes"
