@@ -21,9 +21,7 @@ BaselineOfExercismTestRunner >> baseline: spec [
 			self setUpDependencies: spec.
 			self setUpGoldenTestsFor: spec.
 			spec
-				package: 'ExercismTestRunner'
-					with:
-						[ spec requires: #('ExercismTools')];
+				package: 'ExercismTestRunner'with: [ spec requires: #('Exercism') ];
 				package: 'ExercismTestRunnerTests'
 					with: [ spec requires: #('ExercismTestRunner' 'ExercismTests') ];
 				group: 'default' with: #('ExercismTestRunner');
