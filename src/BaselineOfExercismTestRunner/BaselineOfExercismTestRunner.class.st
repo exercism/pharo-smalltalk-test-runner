@@ -58,5 +58,5 @@ BaselineOfExercismTestRunner >> setUpGoldenTestsFor: spec [
 	
 	self class exerciseGoldenTestPackageNames 
 		do:
-			[ :name | spec package: name with: [ spec requires: #('ExercismTools') ] ]
+			[ :name | spec package: name with: [ spec requires: #('Exercism') ] ]
 ]
