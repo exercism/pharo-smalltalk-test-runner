@@ -5,7 +5,7 @@ Class {
 	#package : 'ExercismTestRunnerTests'
 }
 
-{ #category : '*ExercismTestRunnerTests' }
+{ #category : 'running' }
 ExercismTestTest >> tearDown [ 
 	|aPackage|
 	aPackage := RPackageOrganizer default packageNamed: 'Exercise@MockRunner' ifAbsent: [nil].
@@ -13,7 +13,7 @@ ExercismTestTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : '*ExercismTestRunnerTests' }
+{ #category : 'tests' }
 ExercismTestTest >> testExercismTestResultInfo [
 
 	| testRunnerTest testResult mockTestClass tcInfo|
@@ -42,7 +42,7 @@ ExercismTestTest >> testExercismTestResultInfo [
 	self assert: (tcInfo at: 'output') isNotEmpty.
 ]
 
-{ #category : '*ExercismTestRunnerTests' }
+{ #category : 'tests' }
 ExercismTestTest >> testHumanReadableName [
 	
 	|exeTest|
@@ -54,7 +54,7 @@ ExercismTestTest >> testHumanReadableName [
 	self assert: exeTest humanReadableName equals: 'Another name given'.
 ]
 
-{ #category : '*ExercismTestRunnerTests' }
+{ #category : 'tests' }
 ExercismTestTest >> testResultDebugInfo [
 	|testCase|
 	testCase := WelcomeTest new.
@@ -67,7 +67,7 @@ ExercismTestTest >> testResultDebugInfo [
 	self assert: (testCase resultDebugInfo includesSubstring: 'HelloWorldTest(TestCase)>>performTest'). 
 ]
 
-{ #category : '*ExercismTestRunnerTests' }
+{ #category : 'tests' }
 ExercismTestTest >> testResultMessage [
 	|testCase|
 	testCase := WelcomeTest new.
@@ -80,7 +80,7 @@ ExercismTestTest >> testResultMessage [
 	self assert: testCase resultMessage isNotEmpty. 
 ]
 
-{ #category : '*ExercismTestRunnerTests' }
+{ #category : 'tests' }
 ExercismTestTest >> testSourceCodeString [
 	|testCase|
 	testCase := WelcomeTest new.
@@ -90,7 +90,7 @@ ExercismTestTest >> testSourceCodeString [
 	self assert: (testCase sourceCodeString includes:  Character lf). 
 ]
 
-{ #category : '*ExercismTestRunnerTests' }
+{ #category : 'tests' }
 ExercismTestTest >> testStatusString [
 
 	| testRunnerTest testResult mockTestClass|
