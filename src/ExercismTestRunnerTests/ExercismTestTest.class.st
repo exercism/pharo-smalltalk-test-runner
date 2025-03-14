@@ -1,28 +1,40 @@
 Class {
-	#name : 'ExercismTestTest',
-	#superclass : 'TestCase',
-	#category : 'ExercismTestRunnerTests',
-	#package : 'ExercismTestRunnerTests'
+	#name : #ExercismTestTest,
+	#superclass : #TestCase,
+	#instVars : [
+		'mockTestClass'
+	],
+	#category : #ExercismTestRunnerTests
 }
 
-{ #category : 'running' }
-ExercismTestTest >> tearDown [ 
-	|aPackage|
-	aPackage := RPackageOrganizer default packageNamed: 'Exercise@MockRunner' ifAbsent: [nil].
-	aPackage ifNotNil: [ aPackage removeFromSystem].
-	super tearDown
-]
-
-{ #category : 'tests' }
-ExercismTestTest >> testExercismTestResultInfo [
-
-	| testRunnerTest testResult mockTestClass tcInfo|
+{ #category : #running }
+ExercismTestTest >> setUp [
+	
+	| testRunnerTest |
+	super setUp.
 	testRunnerTest := ExercismTestRunnerTest new.
 
 	"prepare mock test case and solution"
 	testRunnerTest mockRunnerTestCaseSnapshot install.
 	testRunnerTest mockRunnerSolutionSnapshot install.
 	mockTestClass := self class environment at: #MockRunnerTest.
+]
+
+{ #category : #running }
+ExercismTestTest >> tearDown [ 
+
+	|aPackage|
+	mockTestClass := nil.
+	aPackage := RPackageOrganizer default packageNamed: 'Exercise@MockRunner' ifAbsent: [nil].
+	aPackage ifNotNil: [ aPackage removeFromSystem].
+	super tearDown
+]
+
+{ #category : #tests }
+ExercismTestTest >> testExercismTestResultInfo [
+
+	| testResult tcInfo |
+
 	testResult := mockTestClass suite run.
 	testResult dispatchResultsIntoHistory.
 	
@@ -34,15 +46,15 @@ ExercismTestTest >> testExercismTestResultInfo [
 	tcInfo := testResult failures anyOne exercismTestResultInfo.
 	self assert: (tcInfo at: 'status') equals: 'fail'.
 	self assert: (tcInfo at: 'message') isNotEmpty.
-	self assert: (tcInfo at: 'output') isNotEmpty.
+	self assert: (tcInfo at: 'test_code') isNotEmpty.
 
 	tcInfo := testResult errors anyOne exercismTestResultInfo.
 	self assert: (tcInfo at: 'status') equals: 'error'.
 	self assert: (tcInfo at: 'message') isNotEmpty.
-	self assert: (tcInfo at: 'output') isNotEmpty.
+	self assert: (tcInfo at: 'test_code') isNotEmpty.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ExercismTestTest >> testHumanReadableName [
 	
 	|exeTest|
@@ -54,52 +66,50 @@ ExercismTestTest >> testHumanReadableName [
 	self assert: exeTest humanReadableName equals: 'Another name given'.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ExercismTestTest >> testResultDebugInfo [
-	|testCase|
-	testCase := WelcomeTest new.
-	testCase setTestSelector: #testWelcome.
-	self assert: testCase resultDebugInfo equals: ''. 
 	
-	testCase setTestSelector: nil.
+	| mockTestCase |
+	mockTestCase := mockTestClass new.
 	
+	mockTestCase setTestSelector: #testMockMethodA.
+	self assert: mockTestCase resultDebugInfo equals: ''. 
+	
+	mockTestCase setTestSelector: #testMockMethodC.
 	"test if stack bottom is present"
-	self assert: (testCase resultDebugInfo includesSubstring: 'HelloWorldTest(TestCase)>>performTest'). 
+	self assert: (mockTestCase resultDebugInfo includesSubstring: 'MockRunnerTest(TestCase)>>performTest').
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ExercismTestTest >> testResultMessage [
-	|testCase|
-	testCase := WelcomeTest new.
-	testCase setTestSelector: #testWelcome.
-	self assert: testCase resultMessage equals: ''. 
+
+	| mockTestCase |
+	mockTestCase := mockTestClass new.
 	
-	testCase setTestSelector: nil.
+	mockTestCase setTestSelector: #testMockMethodA.
+	self assert: mockTestCase resultMessage equals: ''. 
 	
+	mockTestCase setTestSelector: #testMockMethodC.
 	"errors should provide some error message - exception description"
-	self assert: testCase resultMessage isNotEmpty. 
+	self assert: mockTestCase resultMessage isNotEmpty.
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ExercismTestTest >> testSourceCodeString [
-	|testCase|
-	testCase := WelcomeTest new.
-	testCase setTestSelector: #testWelcome.
-	self assert: (testCase sourceCodeString includesSubstring:  'testWelcome'). 
+	
+	| mockTestCase |
+	mockTestCase := mockTestClass new.
+	
+	mockTestCase setTestSelector: #testMockMethodA.
+	self assert: (mockTestCase sourceCodeString includesSubstring:  'testMockMethodA'). 
 	"test if linux line endings are used for json output"
-	self assert: (testCase sourceCodeString includes:  Character lf). 
+	self assert: (mockTestCase sourceCodeString includes:  Character lf). 
 ]
 
-{ #category : 'tests' }
+{ #category : #tests }
 ExercismTestTest >> testStatusString [
 
-	| testRunnerTest testResult mockTestClass|
-	testRunnerTest := ExercismTestRunnerTest new.
-
-	"prepare mock test case and solution"
-	testRunnerTest mockRunnerTestCaseSnapshot install.
-	testRunnerTest mockRunnerSolutionSnapshot install.
-	mockTestClass := self class environment at: #MockRunnerTest.
+	| testResult |
 	testResult := mockTestClass suite run.
 	testResult dispatchResultsIntoHistory.
 	
