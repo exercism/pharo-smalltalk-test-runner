@@ -229,7 +229,7 @@ ExercismTestRunnerTest >> testFindExercise [
 
 	self should: [ExercismTestRunner default findExercise: 'blurb' ] raise: ExDomainError description: 'Error occurs when trying to find non existing exercise'.
 	
-	self assert: (ExercismTestRunner default findExercise: 'welcome') testCase equals: WelcomeTest. 
+	self assert: (ExercismTestRunner default findExercise: 'example-all-pass') testCase equals: ExampleAllPassTest.
 ]
 
 { #category : 'tests' }
