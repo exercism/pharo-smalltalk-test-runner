@@ -1,13 +1,14 @@
 Class {
-	#name : #ExercismTestTest,
-	#superclass : #TestCase,
+	#name : 'ExercismTestTest',
+	#superclass : 'TestCase',
 	#instVars : [
 		'mockTestClass'
 	],
-	#category : #ExercismTestRunnerTests
+	#category : 'ExercismTestRunnerTests',
+	#package : 'ExercismTestRunnerTests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 ExercismTestTest >> setUp [
 	
 	| testRunnerTest |
@@ -20,7 +21,7 @@ ExercismTestTest >> setUp [
 	mockTestClass := self class environment at: #MockRunnerTest.
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 ExercismTestTest >> tearDown [ 
 
 	|aPackage|
@@ -30,7 +31,7 @@ ExercismTestTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestTest >> testExercismTestResultInfo [
 
 	| testResult tcInfo |
@@ -54,7 +55,7 @@ ExercismTestTest >> testExercismTestResultInfo [
 	self assert: (tcInfo at: 'test_code') isNotEmpty.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestTest >> testHumanReadableName [
 	
 	|exeTest|
@@ -66,7 +67,7 @@ ExercismTestTest >> testHumanReadableName [
 	self assert: exeTest humanReadableName equals: 'Another name given'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestTest >> testResultDebugInfo [
 	
 	| mockTestCase |
@@ -80,7 +81,7 @@ ExercismTestTest >> testResultDebugInfo [
 	self assert: (mockTestCase resultDebugInfo includesSubstring: 'MockRunnerTest(TestCase)>>performTest').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestTest >> testResultMessage [
 
 	| mockTestCase |
@@ -94,7 +95,7 @@ ExercismTestTest >> testResultMessage [
 	self assert: mockTestCase resultMessage isNotEmpty.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestTest >> testSourceCodeString [
 	
 	| mockTestCase |
@@ -106,7 +107,7 @@ ExercismTestTest >> testSourceCodeString [
 	self assert: (mockTestCase sourceCodeString includes:  Character lf). 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestTest >> testStatusString [
 
 	| testResult |

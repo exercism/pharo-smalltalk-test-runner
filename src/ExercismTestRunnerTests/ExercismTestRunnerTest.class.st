@@ -2,12 +2,13 @@
 An ExercismTestRunnerTest is a test class for testing the behavior of ExercismTestRunner
 "
 Class {
-	#name : #ExercismTestRunnerTest,
-	#superclass : #TestCase,
-	#category : #ExercismTestRunnerTests
+	#name : 'ExercismTestRunnerTest',
+	#superclass : 'TestCase',
+	#category : 'ExercismTestRunnerTests',
+	#package : 'ExercismTestRunnerTests'
 }
 
-{ #category : #'test-data' }
+{ #category : 'test-data' }
 ExercismTestRunnerTest class >> mockSnapshotRunnerSolutionSTON [
 
 	"Generated from ExercismTestRunnerTest>>prepareMockTestSolutionForTestRunner"
@@ -56,7 +57,7 @@ ExercismTestRunnerTest class >> mockSnapshotRunnerSolutionSTON [
 }'
 ]
 
-{ #category : #'test-data' }
+{ #category : 'test-data' }
 ExercismTestRunnerTest class >> mockSnapshotRunnerTestCaseSTON [
 
 	"Generated from ExercismTestRunnerTest>>prepareMockTestCaseForTestRunner"
@@ -113,7 +114,7 @@ ExercismTestRunnerTest class >> mockSnapshotRunnerTestCaseSTON [
 }'
 ]
 
-{ #category : #'test-data' }
+{ #category : 'test-data' }
 ExercismTestRunnerTest class >> prepareMockTestCaseForTestRunner [
 " this is used for generating STON representation of MCSnapshot, that can be used to be loaded from file as part of TestRunner functionality"
 |aClass aPackage|
@@ -139,7 +140,7 @@ ExercismTestRunnerTest class >> prepareMockTestCaseForTestRunner [
 	^ TonelWriter new toSTON: aPackage snapshot.
 ]
 
-{ #category : #'test-data' }
+{ #category : 'test-data' }
 ExercismTestRunnerTest class >> prepareMockTestSolutionForTestRunner [
 " this is used for generating STON representation of MCSnapshot, that can be used to be loaded from file as part of TestRunner functionality"
 |aClass |
@@ -160,19 +161,19 @@ ExercismTestRunnerTest class >> prepareMockTestSolutionForTestRunner [
 	^ TonelWriter new toSTON: aClass package snapshot.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 ExercismTestRunnerTest >> mockRunnerSolutionSnapshot [
 
 	^ STON fromString: self class mockSnapshotRunnerSolutionSTON
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 ExercismTestRunnerTest >> mockRunnerTestCaseSnapshot [
 
 	^ STON fromString: self class mockSnapshotRunnerTestCaseSTON
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 ExercismTestRunnerTest >> prepareMockExtensionMethods [
 
 	| package |
@@ -187,14 +188,14 @@ ExercismTestRunnerTest >> prepareMockExtensionMethods [
 	package addMethod: Integer>>#mockMethodInteger.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 ExercismTestRunnerTest >> prepareMockSolution [
 
 	self mockRunnerSolutionSnapshot install.
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 ExercismTestRunnerTest >> prepareMockSolutionFileIn: sourceDirectoryRef [
 
 	(TonelWriter on: sourceDirectoryRef) writeSnapshot: self mockRunnerSolutionSnapshot.
@@ -206,14 +207,14 @@ ExercismTestRunnerTest >> prepareMockSolutionFileIn: sourceDirectoryRef [
 	
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 ExercismTestRunnerTest >> prepareMockTestCase [
 
 	self mockRunnerTestCaseSnapshot install.
 	
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 ExercismTestRunnerTest >> tearDown [ 
 	|aPackage|
 	aPackage := RPackageOrganizer default packageNamed: 'Exercise@MockRunner' ifAbsent: [nil].
@@ -229,7 +230,7 @@ ExercismTestRunnerTest >> tearDown [
 	super tearDown
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testFindExercise [
 
 	self should: [ExercismTestRunner default findExercise: 'blurb' ] raise: ExDomainError description: 'Error occurs when trying to find non existing exercise'.
@@ -237,7 +238,7 @@ ExercismTestRunnerTest >> testFindExercise [
 	self assert: (ExercismTestRunner default findExercise: 'example-all-pass') testCase equals: ExampleAllPassTest.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testImportSourceFilesfrom [
 
 	| memRef |
@@ -263,7 +264,7 @@ ExercismTestRunnerTest >> testImportSourceFilesfrom [
 	self should: [ (self class environment at: #MockRunner) new mockMethodC] raise: Error description: 'MockRunner>>mockMethodC should raise error.'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testLoadSourceDefinitionsFrom [
 
 	|memRef definitions|
@@ -276,7 +277,7 @@ ExercismTestRunnerTest >> testLoadSourceDefinitionsFrom [
 	
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testPrepareMockSolution [
 	|memRef|
 	memRef := FileSystem memory root.
@@ -284,7 +285,7 @@ ExercismTestRunnerTest >> testPrepareMockSolution [
 	self assert: memRef entries isNotEmpty.
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 ExercismTestRunnerTest >> testRemoveDefinedSolutionClassesAndExtensionMethods [
 
 	| exercise |
@@ -300,7 +301,7 @@ ExercismTestRunnerTest >> testRemoveDefinedSolutionClassesAndExtensionMethods [
 	self assert: exercise definedSolutionClasses isEmpty.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testRunTestsFor [
 
 	self should: [ExercismTestRunner default runTestsFor: Object] raise: ExDomainError description: 'Error occurs when trying to test non existing test case'.
@@ -308,7 +309,7 @@ ExercismTestRunnerTest >> testRunTestsFor [
 	self assert: (ExercismTestRunner default runTestsFor: WelcomeTest) hasPassed.
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 ExercismTestRunnerTest >> testRunTestsOnExerciseImportSourcefromResult [
 
 	|memRef inputDir outputDir outputFile|
@@ -330,7 +331,7 @@ ExercismTestRunnerTest >> testRunTestsOnExerciseImportSourcefromResult [
 	self assert: (outputFile contents includesSubstring: '"status" : "fail"').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testSetErrorToJson [
 
 	|result|
@@ -339,7 +340,7 @@ ExercismTestRunnerTest >> testSetErrorToJson [
 	self assert: (result includesSubstring: '"status" : "error"').
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testValidateDefinitions [
 
 	|reader|
@@ -348,7 +349,7 @@ ExercismTestRunnerTest >> testValidateDefinitions [
 	self should: [ExercismTestRunner default validateDefinitions: reader definitions] raise: ExDomainError description: 'Empty source code definitions are not valid for loading exercise'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testValidateDirectory [
 
 	|runner|
@@ -359,7 +360,7 @@ ExercismTestRunnerTest >> testValidateDirectory [
 	self should: [runner validateDirectory: 'non-existing-dir' asFileReference ] raise: ExDomainError description: 'Invalid path to directory should raise domain error'.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testWriteJsonTo [
 	|jsonData memRef|
 	memRef := FileSystem memory root.
