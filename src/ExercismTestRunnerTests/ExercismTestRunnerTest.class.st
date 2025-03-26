@@ -231,6 +231,19 @@ ExercismTestRunnerTest >> tearDown [
 ]
 
 { #category : 'tests' }
+ExercismTestRunnerTest >> testCopySourcesIntoMemoryDirOfFrom [
+
+	|sourceDir targetDir|
+	sourceDir := FileSystem memory root. 
+	(sourceDir / 'myFile.st') ensureCreateFile.
+	"test if sources are moved to expected directory in memory"
+	targetDir := ExercismTestRunner default copySourcesIntoMemoryDirOf: 'my-sample-exercise' from: sourceDir.
+	self assert: targetDir isDirectory.
+	self assert: targetDir basename equals: 'Exercise@MySampleExercise'.
+	self deny: targetDir entries isEmpty.
+]
+
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testFindExercise [
 
 	self should: [ExercismTestRunner default findExercise: 'blurb' ] raise: ExDomainError description: 'Error occurs when trying to find non existing exercise'.
@@ -278,27 +291,22 @@ ExercismTestRunnerTest >> testLoadSourceDefinitionsFrom [
 ]
 
 { #category : 'tests' }
+ExercismTestRunnerTest >> testPackageNameFromSlug [
+
+	| runner |
+	runner := ExercismTestRunner new.
+	self assert: (runner packageNameFromSlug: 'two-fer') equals: 'Exercise@TwoFer'.
+	self assert: (runner packageNameFromSlug: 'single') equals: 'Exercise@Single'.
+	self assert: (runner packageNameFromSlug: 'state-of-tic-tac-toe') equals: 'Exercise@StateOfTicTacToe'.
+	
+]
+
+{ #category : 'tests' }
 ExercismTestRunnerTest >> testPrepareMockSolution [
 	|memRef|
 	memRef := FileSystem memory root.
 	self prepareMockSolutionFileIn: memRef.
 	self assert: memRef entries isNotEmpty.
-]
-
-{ #category : 'running' }
-ExercismTestRunnerTest >> testRemoveDefinedSolutionClassesAndExtensionMethods [
-
-	| exercise |
-	"preparing mock test case"
-	self prepareMockTestCase.
-	self prepareMockSolution.
-	self prepareMockExtensionMethods.
-	exercise := ExercismTestRunner default findExercise: 'mock-runner'.
-	self assertCollection: exercise solutionClasses equals: {(self class environment at: #MockRunner). Integer. Array.} asSet.
-	self assert: exercise definedSolutionClasses equals: {self class environment at: #MockRunner} asSet.
-	exercise removeDefinedSolutionClassesAndExtensionMethods.
-	self assert: exercise solutionClasses isEmpty.
-	self assert: exercise definedSolutionClasses isEmpty.
 ]
 
 { #category : 'tests' }

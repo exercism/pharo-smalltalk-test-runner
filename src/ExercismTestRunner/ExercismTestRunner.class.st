@@ -28,6 +28,18 @@ ExercismTestRunner class >> default [
 ]
 
 { #category : 'private' }
+ExercismTestRunner >> copySourcesIntoMemoryDirOf: exerciseSlug from: importDirectory [
+
+	|memoryReference|
+	"This is needed, since Tonel v3 expects input directory name same as package name"
+	memoryReference := (FileSystem memory root / (self packageNameFromSlug: exerciseSlug )) ensureCreateDirectory.
+	importDirectory entries do: [:sourceFile |   
+		sourceFile asFileReference copyTo: memoryReference / sourceFile basename].
+	
+	^ memoryReference
+]
+
+{ #category : 'private' }
 ExercismTestRunner >> findExercise: slugName [
 
 	^ ExercismExercise find: slugName ifAbsent: [ ExDomainError signal: ('Could not find exercise: {1}.' format: { slugName }) ].
@@ -58,6 +70,12 @@ ExercismTestRunner >> loadSourceDefinitionsFrom: inputDirectory [
 ]
 
 { #category : 'private' }
+ExercismTestRunner >> packageNameFromSlug: exerciseSlug [
+
+	^ 'Exercise@{1}' format: {exerciseSlug kebabAsCamelCase}
+]
+
+{ #category : 'private' }
 ExercismTestRunner >> runTestsFor: testClass [
 
 	^ [testClass suite run] on: Error do: [ExDomainError signal: ('Error occured during running tests on test class: {1}.' format: { testClass name})].
@@ -66,16 +84,14 @@ ExercismTestRunner >> runTestsFor: testClass [
 { #category : 'api actions' }
 ExercismTestRunner >> runTestsOnExercise: slugName importSourceFrom: inputDirectory result: outputDirectory [
 
+	|exercise testResult outputJson memoryDirectory|
 	"this is Exercism test runner implementation - it will load exercise code and run tests, resulting in json file in output directory"
-	|exercise testResult outputJson|
 
 	[	
+		self validateDirectory: inputDirectory.
+		memoryDirectory := self copySourcesIntoMemoryDirOf: slugName from: inputDirectory. 
+		self importSourceFilesfrom: memoryDirectory.
 		exercise := self findExercise: slugName.
-		
-		"remove all example solutions - solution classes, ext. methods prior student solution import"
-		exercise removeDefinedSolutionClassesAndExtensionMethods.
-		
-		self importSourceFilesfrom: inputDirectory.
 		testResult := self runTestsFor: exercise testCase.
 		testResult dispatchResultsIntoHistory.
 		outputJson := STONJSONWriter streamContentsOf: testResult exercismTestRunnerData.
@@ -87,7 +103,7 @@ ExercismTestRunner >> runTestsOnExercise: slugName importSourceFrom: inputDirect
 		"just return domain error text, instead of passing exception. Process will end with success, and domain error is written to resulting json"
 		^ domainError messageText
 	].
-	self writeJson: outputJson  to: outputDirectory.
+	self writeJson: outputJson to: outputDirectory.
 	^ testResult 
 ]
 
