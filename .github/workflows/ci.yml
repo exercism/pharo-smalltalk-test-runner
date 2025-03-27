@@ -21,9 +21,6 @@ jobs:
         with:
           install: true
 
-      - name: Read Pharo-sync-commit file and set to env variable
-        run: bin/export-sync-commit.sh
-
       - name: Build Docker image and store in cache
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
@@ -33,7 +30,6 @@ jobs:
           tags: exercism/pharo-smalltalk-test-runner
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          build-args: SHA_OR_BRANCH=${{ env.SHA_OR_BRANCH }}
 
       - name: Run Tests in Docker
         run: bin/run-tests-in-docker.sh
