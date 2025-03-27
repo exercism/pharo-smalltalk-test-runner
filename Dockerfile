@@ -1,7 +1,7 @@
 FROM ghcr.io/ba-st/pharo-loader:v11.0.0 AS loader
 ARG GROUP_NAMES=testRunner
 ARG SHA_OR_BRANCH=main
-RUN pharo metacello install github://bajger/pharo-smalltalk-test-runner:$SHA_OR_BRANCH/dev/src BaselineOfExercismTestRunner --groups=$GROUP_NAMES
+RUN pharo metacello install github://exercism/pharo-smalltalk-test-runner:$SHA_OR_BRANCH/dev/src BaselineOfExercismTestRunner --groups=$GROUP_NAMES
 RUN pharo eval --save "NoChangesLog install. \
     NoPharoFilesOpener install. \
     PharoCommandLineHandler forcePreferencesOmission: true. \
