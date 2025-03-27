@@ -1,3 +1,3 @@
 # Latest commit SHA of exercism/pharo-smalltalk-test-runner on main branch to sync with Pharo test runner image
 # It is used as env variable in .github/workflows/ci.yml
-680fb27
+3efa3e7
