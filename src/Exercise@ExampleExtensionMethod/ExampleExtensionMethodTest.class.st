@@ -6,7 +6,13 @@ Class {
 }
 
 { #category : 'private' }
-ExampleExtensionMethodTest class >> exampleSolutionSourceCode [
+ExampleExtensionMethodTest class >> exTonelExtensionFilename [
+
+	^ ClassDescription exTonelExtensionFilenameFor: String name 
+]
+
+{ #category : 'private' }
+ExampleExtensionMethodTest class >> exampleSolutionExtensionSourceCode [
 
 	^ 'Extension { #name : #String }
 
@@ -15,6 +21,17 @@ String >> somethingReturned [
 
 	^ ''something returned''
 ]
+'
+]
+
+{ #category : 'private' }
+ExampleExtensionMethodTest class >> exampleSolutionSourceCode [ 
+	"use only empty class that should overwrite example implementation"
+	^ 'Class {
+	#name : #ExampleExtensionMethod,
+	#superclass : #Object,
+	#category : #''Exercise@ExampleExtensionMethod''
+}
 '
 ]
 
@@ -40,4 +57,18 @@ ExampleExtensionMethodTest class >> exercise [
 		difficulty: 1;
 		topics: #(''introduction'');
 		yourself.
+]
+
+{ #category : 'private' }
+ExampleExtensionMethodTest class >> prepareExampleSolutionSourceCode [
+
+	| solutionClass|
+	" this is used for generating STON representation of MCSnapshot, that can be used to generate solution of example (golden test)"
+
+	solutionClass  := Object << (self exercise exerciseClassName)
+	slots:{};
+	package: self package name asString;
+	install.
+	
+	^ TonelWriter sourceCodeOf: solutionClass
 ]

@@ -40,6 +40,10 @@ TestRunnerExampleGenerator class >> generateExamplesToDirectory: aDirReference [
 		"write test file only if not empty"
 		exampleClass exampleTestCasesSourceCode ifNotEmpty: [:aSource | 
 			self writeFile: exampleDir / exampleClass exTonelTestFilename  with: aSource
+		].
+		"write extension methods file only if not empty"
+		exampleClass exampleSolutionExtensionSourceCode ifNotEmpty: [:aSource | 
+			self writeFile: exampleDir / exampleClass exTonelExtensionFilename with: aSource
 		]
 	].
 	
