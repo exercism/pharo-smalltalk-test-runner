@@ -40,6 +40,14 @@ ExampleAllRaiseErrorTest class >> exampleTestCasesSourceCode [
 #category : #''Exercise@ExampleAllRaiseError''
 }
 
+{ #category : ''as yet unclassified'' }
+ExampleAllRaiseErrorTest class >> exercise [
+	^ (ExercismExercise for: self)
+		difficulty: 1;
+		topics: #(''introduction'');
+		yourself.
+]
+
 { #category : #''as yet unclassified'' }
 ExampleAllRaiseErrorTest >> testExerciseMethodA [
 	self assert: ExampleAllRaiseError new exerciseMethodA
