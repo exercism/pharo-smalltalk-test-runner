@@ -40,6 +40,14 @@ ExampleErrorFailPassTest class >> exampleTestCasesSourceCode [
 #category : #''Exercise@ExampleErrorFailPass''
 }
 
+{ #category : ''as yet unclassified'' }
+ExampleErrorFailPassTest class >> exercise [
+	^ (ExercismExercise for: self)
+		difficulty: 1;
+		topics: #(''introduction'');
+		yourself.
+]
+
 { #category : #''as yet unclassified'' }
 ExampleErrorFailPassTest >> testExerciseMethodA [
 	self assert: ExampleErrorFailPass new exerciseMethodA equals: $A

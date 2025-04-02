@@ -1,7 +1,5 @@
-Extension { #name : #String }
-
-{ #category : #'*Exercise@ExampleExtensionMethod' }
-String >> somethingReturned [
-
-	^ 'something returned'
-]
+Class {
+	#name : #ExampleExtensionMethod,
+	#superclass : #Object,
+	#category : #'Exercise@ExampleExtensionMethod'
+}

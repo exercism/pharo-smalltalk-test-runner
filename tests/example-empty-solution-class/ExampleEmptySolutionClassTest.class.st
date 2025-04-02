@@ -4,6 +4,14 @@ Class {
 #category : #'Exercise@ExampleEmptySolutionClass'
 }
 
+{ #category : 'as yet unclassified' }
+ExampleEmptySolutionClassTest class >> exercise [
+	^ (ExercismExercise for: self)
+		difficulty: 1;
+		topics: #('introduction');
+		yourself.
+]
+
 { #category : #'as yet unclassified' }
 ExampleEmptySolutionClassTest >> testExampleMethodA [
 	self assert: ExampleEmptySolutionClass new exerciseMethodA equals: $A
